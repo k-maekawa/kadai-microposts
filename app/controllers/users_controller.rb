@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers,:likes]
 
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
@@ -21,13 +21,11 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
-      #@userで記載した処理にリダイレクトして実行する
       
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
-      #users/new.html.erb を表示するだけ（リダイレクトはしない）
-      #「create」というファイルはないからapp/views/tasks/create.html.erb を呼び出して表示をしてくれるよう指示
+
       
     end
   end
@@ -43,7 +41,23 @@ class UsersController < ApplicationController
     @followers = @user.followers.page(params[:page])
     counts(@user)
   end
-
+  
+  def favorites
+    @micropost = Micropost.find(params[:id])
+    @favorites = @micropost.favorites.page(params[:page])
+    counts(@micropost)
+  end
+  
+  def favorite?
+      @micropost = Micropost.find(params[:id])
+      @favorites = @micropost.favorites.page(params[:page])
+  end
+  
+  def likes
+    @micropost = Micropost.find(params[:id])
+    @favorites = @micropost.favorites.page(params[:page])
+  end
+  
   private
 
   def user_params
