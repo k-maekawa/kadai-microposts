@@ -180,7 +180,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.8)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -194,7 +194,6 @@ GEM
     websocket-extensions (0.1.5)
 
 PLATFORMS
-  ruby
   x86_64-darwin-20
 
 DEPENDENCIES
@@ -225,4 +224,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   2.2.0
+   2.2.1

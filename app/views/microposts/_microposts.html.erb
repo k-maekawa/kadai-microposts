@@ -1,5 +1,5 @@
 <ul class="list-unstyled">
-  <% @microposts.each do |micropost| %>
+  <% microposts.each do |micropost| %>
     <li class="media mb-3">
       <img class="mr-2 rounded" src="<%= gravatar_url(micropost.user, { size: 50 }) %>" alt="">
       <div class="media-body">
@@ -13,7 +13,7 @@
           <p class="mb-0"><%= micropost.favorites_count %>Likes</p>
         </div>
         <div class="btn-toolbar">
-            <%= render 'favorites/like_button', micropost: @micropost %>
+            <%= render 'favorites/like_button', micropost: micropost %>
             
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger mr-10' %>
@@ -23,5 +23,5 @@
       </div>
     </li>
   <% end %>
-  <%= paginate @microposts %>
+  <%= paginate microposts %>
 </ul>
