@@ -1,22 +1,18 @@
 class MicropostsController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
-  
- def create
+
+  def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = 'メッセージを投稿しました。'
       redirect_to root_url
-      #root_urlに移動して実行する
-      
     else
-       @microposts = current_user.microposts.order(id: :desc).page(params[:page])
+      @microposts = current_user.microposts.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
       render 'toppages/index'
-      #toppages/index.html.erb を開く(実行しない)
-      
     end
- end
+  end
 
   def destroy
     @micropost.destroy
